@@ -8,7 +8,7 @@ public class SplitExample {
 		 
 		 Linea lineaLeida = new Linea();
 		 lineaLeida.setUpLinea();
-		 lineaLeida.setLineaAnalizar("0A WVDT0025-NRO-MENSAJE              PIC X(04) VALUE '0025'.");
+		 lineaLeida.setLineaAnalizar("02 WVDT0025-NRO-MENSAJE              PIC X(04) VALUE '0025'.");
 		 lineaLeida.obtenerTokens();
 		 lineaLeida.generarCampo();
 		 
