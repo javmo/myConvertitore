@@ -47,7 +47,9 @@ public class Linea {
 		}
 				
 	}
-private void tercerBarrido() {
+//Tercer barrido se contempla que sea una variable normal, una varaible con occurs
+//, el valor si es un booleano, si hay una variable que redefine a otra o si es un super nivel
+public void tercerBarrido() {
 	
 	switch (this.listaTokens.get(index)) {
 		case "PIC":
@@ -69,13 +71,15 @@ private void tercerBarrido() {
 		case "\\.":
 			this.miCampo.setEsSupernivel(true);
 			break;
+		default:
+			tratarErorr();
+			break;
 	
 	}
-		
-		
-	}
+				
+}
 // segundo barrido, analiza que el nombre del campo no sea numerico	
-private void segundoBarrido() {
+public void segundoBarrido() {
 	if(this.isNotString()) {
 		this.tratarErorr();
 	}
@@ -91,7 +95,7 @@ private void segundoBarrido() {
 	
 }
 // Trata el error dependiendo el barrido
-	private void tratarErorr() {
+	public void tratarErorr() {
 		this.setDeboSeguir(false);
 		System.out.println("---------------------------");
 		System.out.print("ERROR en el barrido Nº ");
@@ -103,8 +107,10 @@ private void segundoBarrido() {
 			case 1:	
 				System.out.println("Se esperaba el que el nombre del campo sea un string(No debe ser numerico)");
 				break;
+			case 2:
+				System.out.println("Se registro un token value y no es un nivel booleano o se registro un token redefine y es booleano");
 		}
-}
+	}
 	
 	public Campo getMiCampo() {
 		return miCampo;
