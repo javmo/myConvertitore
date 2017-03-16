@@ -29,8 +29,10 @@ public class Linea {
 		
 		this.primerBarrido();
 		if(deboSeguir){
+			++index;
 			this.segundoBarrido();
 			if(deboSeguir){
+				++index;
 				this.tercerBarrido();
 				if(deboSeguir){
 					this.cuartoBarrido();
@@ -45,13 +47,36 @@ public class Linea {
 		}
 				
 	}
+// segundo barrido, analiza que el nombre del campo no sea numerico	
+private void segundoBarrido() {
+	if(this.isNotString()) {
+		this.tratarErorr();
+	}
+	this.miCampo.setNombre(listaTokens.get(index));
+}
 // primer barrido se analiza el nivel del campo debe ser un entero
 	public void primerBarrido() {
 	if (this.listaTokens.get(index) == "\\." || this.isNotNumeric()){
-			
-		
+		this.tratarErorr();
 	}
+	this.miCampo.setNivel(Integer.parseInt(listaTokens.get(index)));
 		
+	
+}
+// Trata el error dependiendo el barrido
+	private void tratarErorr() {
+		this.setDeboSeguir(false);
+		System.out.println("---------------------------");
+		System.out.print("ERROR en el barrido Nº ");
+		System.out.print(index);
+		switch (index) {
+			case 0:
+				System.out.println("Se esperaba el nivel de la variable (Debe ser nuemrico)");
+				break;
+			case 1:	
+				System.out.println("Se esperaba el que el nombre del campo sea un string(No debe ser numerico)");
+				break;
+		}
 	
 }
 	public Campo getMiCampo() {
@@ -87,11 +112,33 @@ public class Linea {
 			return true;
 		}
 	}
+	
+	public boolean isNotString() {
+        if (listaTokens.get(index).equals(listaTokens.get(index).toString())) {
+            return false;
+        } else {
+            return true;
+        }
+ 
+    }
+	
 	public List<String> getListaTokens() {
 		return listaTokens;
 	}
 	public void setListaTokens(List<String> listaTokens) {
 		this.listaTokens = listaTokens;
+	}
+	public Boolean getDeboSeguir() {
+		return deboSeguir;
+	}
+	public void setDeboSeguir(Boolean deboSeguir) {
+		this.deboSeguir = deboSeguir;
+	}
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 
