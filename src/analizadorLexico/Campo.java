@@ -8,6 +8,8 @@ public class Campo {
 	String tipoDeDato;
 	String informacion;
 	Boolean esSupernivel;
+	Boolean esOccurs;
+	Boolean esRedefine;
 	
 	
 	public void setNombre(String nombre){
@@ -75,6 +77,22 @@ public class Campo {
 
 	public void setEsSupernivel(Boolean esSupernivel) {
 		this.esSupernivel = esSupernivel;
+	}
+
+	public Boolean getEsRedefine() {
+		return esRedefine;
+	}
+
+	public void setEsRedefine(Boolean esRedefine) {
+		this.esRedefine = esRedefine;
+	}
+
+	public Boolean getEsOccurs() {
+		return esOccurs;
+	}
+
+	public void setEsOccurs(Boolean esOccurs) {
+		this.esOccurs = esOccurs;
 	}
 	
 

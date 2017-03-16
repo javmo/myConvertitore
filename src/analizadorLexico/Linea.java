@@ -47,6 +47,33 @@ public class Linea {
 		}
 				
 	}
+private void tercerBarrido() {
+	
+	switch (this.listaTokens.get(index)) {
+		case "PIC":
+			break;
+		case "OCCURS":
+			this.miCampo.setEsOccurs(true);
+			break;
+		case "VALUE":
+			if(this.miCampo.getNivel() != 88){
+				tratarErorr();
+			}
+			break;
+		case "REDEFINE":
+			if(this.miCampo.getNivel() == 88){
+				tratarErorr();
+			}
+			this.miCampo.setEsRedefine(true);
+			break;
+		case "\\.":
+			this.miCampo.setEsSupernivel(true);
+			break;
+	
+	}
+		
+		
+	}
 // segundo barrido, analiza que el nombre del campo no sea numerico	
 private void segundoBarrido() {
 	if(this.isNotString()) {
@@ -77,8 +104,8 @@ private void segundoBarrido() {
 				System.out.println("Se esperaba el que el nombre del campo sea un string(No debe ser numerico)");
 				break;
 		}
-	
 }
+	
 	public Campo getMiCampo() {
 		return miCampo;
 	}
