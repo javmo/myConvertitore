@@ -1,9 +1,8 @@
 package analizadorLexico;
 
 import java.util.List;
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.Collection;
 
 public class Linea {
 	
@@ -35,11 +34,11 @@ public class Linea {
 				++index;
 				this.tercerBarrido();
 				if(deboSeguir){
-					this.cuartoBarrido();
+//					this.cuartoBarrido();
 					if(deboSeguir){
-						this.quintoBarrido();
+//						this.quintoBarrido();
 						if(deboSeguir){
-							this.sextoBarrido();
+//							this.sextoBarrido();
 						}
 					}
 				}
@@ -99,7 +98,7 @@ public void segundoBarrido() {
 		this.setDeboSeguir(false);
 		System.out.println("---------------------------");
 		System.out.print("ERROR en el barrido Nº ");
-		System.out.print(index);
+		System.out.print(index+" ");
 		switch (index) {
 			case 0:
 				System.out.println("Se esperaba el nivel de la variable (Debe ser nuemrico)");
@@ -173,7 +172,10 @@ public void segundoBarrido() {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-
+	public void setUpLinea() {
+		this.setDeboSeguir(true);
+		
+	}
 
 	
 }

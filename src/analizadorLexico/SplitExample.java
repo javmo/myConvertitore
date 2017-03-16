@@ -7,12 +7,13 @@ public class SplitExample {
 		 int j = 0;
 		 
 		 Linea lineaLeida = new Linea();
-		 
-		 lineaLeida.setLineaAnalizar("03 WVDT0025-NRO-MENSAJE              PIC X(04) VALUE '0025'.");
+		 lineaLeida.setUpLinea();
+		 lineaLeida.setLineaAnalizar("0A WVDT0025-NRO-MENSAJE              PIC X(04) VALUE '0025'.");
 		 lineaLeida.obtenerTokens();
+		 lineaLeida.generarCampo();
 		 
 		 while(j<lineaLeida.arrayTokens.length){
-			 System.out.print("Token nï¿½");
+			 System.out.print("Token nº");
 			 System.out.print(j);
 			 System.out.print(": ");
 			 System.out.println(lineaLeida.arrayTokens[j]);
