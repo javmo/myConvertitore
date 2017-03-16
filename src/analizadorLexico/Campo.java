@@ -7,10 +7,21 @@ public class Campo {
 	int longitud;
 	String tipoDeDato;
 	String informacion;
+//---------Booleanos seteados en el segundo barrido------------//	
+	Boolean esFiller;
+//---------Booleanos seteados en el tercer barrido------------//	
 	Boolean esSupernivel;
 	Boolean esOccurs;
 	Boolean esRedefine;
-	
+	Boolean esVarClasica;
+//-----------------------------------------------------------//	
+	public void inicializarCampo(){
+		this.setEsFiller(false);
+		this.setEsOccurs(false);
+		this.setEsRedefine(false);
+		this.setEsSupernivel(false);
+		this.setEsVarClasica(false);
+	}
 	
 	public void setNombre(String nombre){
 		this.nombre = nombre;
@@ -93,6 +104,22 @@ public class Campo {
 
 	public void setEsOccurs(Boolean esOccurs) {
 		this.esOccurs = esOccurs;
+	}
+
+	public Boolean getEsVarClasica() {
+		return esVarClasica;
+	}
+
+	public void setEsVarClasica(Boolean esVarClasica) {
+		this.esVarClasica = esVarClasica;
+	}
+
+	public Boolean getEsFiller() {
+		return esFiller;
+	}
+
+	public void setEsFiller(Boolean esFiller) {
+		this.esFiller = esFiller;
 	}
 	
 

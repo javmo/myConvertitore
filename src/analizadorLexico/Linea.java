@@ -25,6 +25,7 @@ public class Linea {
 // analiza los tokens y los transforma en un campo	
 	public void generarCampo(){
 		miCampo = new Campo();
+		miCampo.inicializarCampo();
 		
 		this.primerBarrido();
 		if(deboSeguir){
@@ -52,6 +53,7 @@ public void tercerBarrido() {
 	
 	switch (this.listaTokens.get(index)) {
 		case "PIC":
+			this.miCampo.setEsVarClasica(true);
 			break;
 		case "OCCURS":
 			this.miCampo.setEsOccurs(true);
@@ -81,6 +83,9 @@ public void tercerBarrido() {
 public void segundoBarrido() {
 	if(this.isNotString()) {
 		this.tratarErorr();
+	}
+	if (listaTokens.get(index) == "FILLER"){
+		this.miCampo.setEsFiller(true);
 	}
 	this.miCampo.setNombre(listaTokens.get(index));
 }
