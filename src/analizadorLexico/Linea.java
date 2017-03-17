@@ -1,9 +1,8 @@
 package analizadorLexico;
 
 import java.util.List;
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.Collection;
 
 public class Linea {
 	
@@ -26,6 +25,7 @@ public class Linea {
 // analiza los tokens y los transforma en un campo	
 	public void generarCampo(){
 		miCampo = new Campo();
+		miCampo.inicializarCampo();
 		
 		this.primerBarrido();
 		if(deboSeguir){
@@ -35,11 +35,11 @@ public class Linea {
 				++index;
 				this.tercerBarrido();
 				if(deboSeguir){
-					this.cuartoBarrido();
+//					this.cuartoBarrido();
 					if(deboSeguir){
-						this.quintoBarrido();
+//						this.quintoBarrido();
 						if(deboSeguir){
-							this.sextoBarrido();
+//							this.sextoBarrido();
 						}
 					}
 				}
@@ -47,10 +47,45 @@ public class Linea {
 		}
 				
 	}
+//Tercer barrido se contempla que sea una variable normal, una varaible con occurs
+//, el valor si es un booleano, si hay una variable que redefine a otra o si es un super nivel
+public void tercerBarrido() {
+	
+	switch (this.listaTokens.get(index)) {
+		case "PIC":
+			this.miCampo.setEsVarClasica(true);
+			break;
+		case "OCCURS":
+			this.miCampo.setEsOccurs(true);
+			break;
+		case "VALUE":
+			if(this.miCampo.getNivel() != 88){
+				tratarErorr();
+			}
+			break;
+		case "REDEFINE":
+			if(this.miCampo.getNivel() == 88){
+				tratarErorr();
+			}
+			this.miCampo.setEsRedefine(true);
+			break;
+		case "\\.":
+			this.miCampo.setEsSupernivel(true);
+			break;
+		default:
+			tratarErorr();
+			break;
+	
+	}
+				
+}
 // segundo barrido, analiza que el nombre del campo no sea numerico	
-private void segundoBarrido() {
+public void segundoBarrido() {
 	if(this.isNotString()) {
 		this.tratarErorr();
+	}
+	if (listaTokens.get(index) == "FILLER"){
+		this.miCampo.setEsFiller(true);
 	}
 	this.miCampo.setNombre(listaTokens.get(index));
 }
@@ -64,11 +99,11 @@ private void segundoBarrido() {
 	
 }
 // Trata el error dependiendo el barrido
-	private void tratarErorr() {
+	public void tratarErorr() {
 		this.setDeboSeguir(false);
 		System.out.println("---------------------------");
-		System.out.print("ERROR en el barrido Nº ");
-		System.out.print(index);
+		System.out.print("ERROR en el barrido Nï¿½ ");
+		System.out.print(index+" ");
 		switch (index) {
 			case 0:
 				System.out.println("Se esperaba el nivel de la variable (Debe ser nuemrico)");
@@ -76,9 +111,11 @@ private void segundoBarrido() {
 			case 1:	
 				System.out.println("Se esperaba el que el nombre del campo sea un string(No debe ser numerico)");
 				break;
+			case 2:
+				System.out.println("Se registro un token value y no es un nivel booleano o se registro un token redefine y es booleano");
 		}
+	}
 	
-}
 	public Campo getMiCampo() {
 		return miCampo;
 	}
@@ -140,7 +177,8 @@ private void segundoBarrido() {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-
-
-	
+	public void setUpLinea() {
+		this.setDeboSeguir(true);
+		
+	}
 }
