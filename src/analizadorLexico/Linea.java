@@ -50,6 +50,8 @@ public class Linea {
 public void cuartoBarrido() {
 //------------------------------	
 	if(this.miCampo.esOccurs){
+		String[] numeroDeOccurs = (this.listaTokens.get(index).split("\\."));
+		this.miCampo.setCantidadDeOccurs(Integer.parseInt(numeroDeOccurs[1]));
 //------------------------------		
 	}else if(this.miCampo.esRedefine){
 //------------------------------		
