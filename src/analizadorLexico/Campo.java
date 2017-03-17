@@ -10,6 +10,7 @@ public class Campo {
 	String tipoDeDato;
 	String informacion;
 	List<Campo> occursDeCampos;
+	int cantidadDeOccurs;
 //---------Booleanos seteados en el segundo barrido------------//	
 	Boolean esFiller;
 //---------Booleanos seteados en el tercer barrido------------//	
@@ -123,6 +124,22 @@ public class Campo {
 
 	public void setEsFiller(Boolean esFiller) {
 		this.esFiller = esFiller;
+	}
+
+	public List<Campo> getOccursDeCampos() {
+		return occursDeCampos;
+	}
+
+	public void setOccursDeCampos(List<Campo> occursDeCampos) {
+		this.occursDeCampos = occursDeCampos;
+	}
+
+	public int getCantidadDeOccurs() {
+		return cantidadDeOccurs;
+	}
+
+	public void setCantidadDeOccurs(int cantidadDeOccurs) {
+		this.cantidadDeOccurs = cantidadDeOccurs;
 	}
 	
 

@@ -35,7 +35,7 @@ public class Linea {
 				++index;
 				this.tercerBarrido();
 				if(deboSeguir){
-//					this.cuartoBarrido();
+					this.cuartoBarrido();
 					if(deboSeguir){
 //						this.quintoBarrido();
 						if(deboSeguir){
@@ -47,6 +47,21 @@ public class Linea {
 		}
 				
 	}
+public void cuartoBarrido() {
+//------------------------------	
+	if(this.miCampo.esOccurs){
+//------------------------------		
+	}else if(this.miCampo.esRedefine){
+//------------------------------		
+	}else if(this.miCampo.esSupernivel){
+//------------------------------		
+	}else if(this.miCampo.esFiller){
+//------------------------------		
+	}else if(this.miCampo.esVarClasica){
+//------------------------------		
+	}
+	this.tratarErorr();
+}
 //Tercer barrido se contempla que sea una variable normal, una varaible con occurs
 //, el valor si es un booleano, si hay una variable que redefine a otra o si es un super nivel
 public void tercerBarrido() {
