@@ -1,5 +1,7 @@
 package analizadorLexico;
 
+import java.util.List;
+
 public class Campo {
 	
 	String nombre;
@@ -7,6 +9,7 @@ public class Campo {
 	int longitud;
 	String tipoDeDato;
 	String informacion;
+	List<Campo> occursDeCampos;
 //---------Booleanos seteados en el segundo barrido------------//	
 	Boolean esFiller;
 //---------Booleanos seteados en el tercer barrido------------//	
