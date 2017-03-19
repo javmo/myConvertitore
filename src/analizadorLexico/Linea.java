@@ -35,6 +35,7 @@ public class Linea {
 				++index;
 				this.tercerBarrido();
 				if(deboSeguir){
+					++index;
 					this.cuartoBarrido();
 					if(deboSeguir){
 //						this.quintoBarrido();
@@ -48,19 +49,64 @@ public class Linea {
 				
 	}
 public void cuartoBarrido() {
+	String[] numeroDeOccurs = (this.listaTokens.get(index).split("\\."));
 //------------------------------	
 	if(this.miCampo.esOccurs){
-		String[] numeroDeOccurs = (this.listaTokens.get(index).split("\\."));
-		this.miCampo.setCantidadDeOccurs(Integer.parseInt(numeroDeOccurs[1]));
+		if(this.isNotNumeric(numeroDeOccurs[0])){
+			this.tratarErorr();
+		}
+		this.miCampo.setCantidadDeOccurs(Integer.parseInt(numeroDeOccurs[0]));
 //------------------------------		
 	}else if(this.miCampo.esRedefine){
+		if(this.isNotString(numeroDeOccurs[0])){
+			this.tratarErorr();
+		}
+		this.miCampo.setRedefineA(numeroDeOccurs[0]);
 //------------------------------		
 	}else if(this.miCampo.esSupernivel){
+		if(this.listaTokens.get(index) != "\\."){
+			this.tratarErorr();
+		}
 //------------------------------		
-	}else if(this.miCampo.esFiller){
+	}else if((this.miCampo.esFiller) || (this.miCampo.esVarClasica)  ){
+		if ((listaTokens.get(index).indexOf("(")) == -1){
+			this.obtengoLongSinParentesis();
+		}
+		else{
+			this.obtengoLongConParentesis();
+		}
+			
 //------------------------------		
-	}else if(this.miCampo.esVarClasica){
 //------------------------------		
+	}
+	this.tratarErorr();
+}
+// obtengo longitud por medio del caso PIC X(02) o PIC 9(04)
+public void obtengoLongConParentesis() {
+	if((listaTokens.get(index)).indexOf("X") != -1 ){
+		this.miCampo.setEsCaracter(true);
+	}else if((listaTokens.get(index)).indexOf("9") != -1){
+		this.miCampo.setEsNumerico(true);
+		
+		}
+		else{
+			this.tratarErorr();
+		}
+
+	String[] enteroConUnParentesis = this.listaTokens.get(index).split("\\(");
+	String[] enteroPuro = enteroConUnParentesis[1].split("\\)");
+	this.miCampo.setLongitud(Integer.parseInt(enteroPuro[0]));
+	
+}
+// Se obtiene la longitud y el tipo de dato del campo por medio de la nomenclatura sin parentesis
+// ejemplo PIC XX o PIC 9999
+public void obtengoLongSinParentesis() {
+	if((listaTokens.get(index)).indexOf("X") != -1 ){
+		this.miCampo.setEsCaracter(true);;
+		this.miCampo.setLongitud(listaTokens.get(index).length());
+	}else if((listaTokens.get(index)).indexOf("9") != -1){
+		this.miCampo.setEsNumerico(true);
+		this.miCampo.setLongitud(listaTokens.get(index).length());
 	}
 	this.tratarErorr();
 }
@@ -70,7 +116,9 @@ public void tercerBarrido() {
 	
 	switch (this.listaTokens.get(index)) {
 		case "PIC":
-			this.miCampo.setEsVarClasica(true);
+			if(!(this.miCampo.esFiller)){
+				this.miCampo.setEsVarClasica(true);
+			}
 			break;
 		case "OCCURS":
 			this.miCampo.setEsOccurs(true);
@@ -98,7 +146,7 @@ public void tercerBarrido() {
 }
 // segundo barrido, analiza que el nombre del campo no sea numerico	
 public void segundoBarrido() {
-	if(this.isNotString()) {
+	if(this.isNotString(listaTokens.get(index))) {
 		this.tratarErorr();
 	}
 	if (listaTokens.get(index) == "FILLER"){
@@ -108,7 +156,7 @@ public void segundoBarrido() {
 }
 // primer barrido se analiza el nivel del campo debe ser un entero
 	public void primerBarrido() {
-	if (this.listaTokens.get(index) == "\\." || this.isNotNumeric()){
+	if (this.listaTokens.get(index) == "\\." || this.isNotNumeric(listaTokens.get(index))){
 		this.tratarErorr();
 	}
 	this.miCampo.setNivel(Integer.parseInt(listaTokens.get(index)));
@@ -119,7 +167,7 @@ public void segundoBarrido() {
 	public void tratarErorr() {
 		this.setDeboSeguir(false);
 		System.out.println("---------------------------");
-		System.out.print("ERROR en el barrido N� ");
+		System.out.print("ERROR en el barrido Numero ");
 		System.out.print(index+" ");
 		switch (index) {
 			case 0:
@@ -130,6 +178,8 @@ public void segundoBarrido() {
 				break;
 			case 2:
 				System.out.println("Se registro un token value y no es un nivel booleano o se registro un token redefine y es booleano");
+			case 3:
+				System.out.println("Se registro un tipo de dato invalido, el numero de occurs no es nuemrico, el campo a redefinir no esta informado correctamente, es super nivel y no se informa el fin de sentencia");	
 		}
 	}
 	
@@ -158,17 +208,17 @@ public void segundoBarrido() {
 
 	}
 
-	public boolean isNotNumeric(){
+	public boolean isNotNumeric(String numeroEnString){
 		try {
-			Integer.parseInt(listaTokens.get(index));
+			Integer.parseInt(numeroEnString);
 			return false;
 		} catch (NumberFormatException nfe){
 			return true;
 		}
 	}
 	
-	public boolean isNotString() {
-        if (listaTokens.get(index).equals(listaTokens.get(index).toString())) {
+	public boolean isNotString(String stringConNumero) {
+        if (stringConNumero.equals(stringConNumero.toString())) {
             return false;
         } else {
             return true;

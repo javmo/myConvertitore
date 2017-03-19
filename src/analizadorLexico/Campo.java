@@ -11,6 +11,7 @@ public class Campo {
 	String informacion;
 	List<Campo> occursDeCampos;
 	int cantidadDeOccurs;
+	String redefineA;
 //---------Booleanos seteados en el segundo barrido------------//	
 	Boolean esFiller;
 //---------Booleanos seteados en el tercer barrido------------//	
@@ -18,6 +19,9 @@ public class Campo {
 	Boolean esOccurs;
 	Boolean esRedefine;
 	Boolean esVarClasica;
+//---------Booleanos seteados en el cuarto barrido------------//
+	Boolean esCaracter;
+	Boolean esNumerico;
 //-----------------------------------------------------------//	
 	public void inicializarCampo(){
 		this.setEsFiller(false);
@@ -25,6 +29,8 @@ public class Campo {
 		this.setEsRedefine(false);
 		this.setEsSupernivel(false);
 		this.setEsVarClasica(false);
+		this.setEsCaracter(false);
+		this.setEsNumerico(false);
 	}
 	
 	public void setNombre(String nombre){
@@ -140,6 +146,30 @@ public class Campo {
 
 	public void setCantidadDeOccurs(int cantidadDeOccurs) {
 		this.cantidadDeOccurs = cantidadDeOccurs;
+	}
+
+	public String getRedefineA() {
+		return redefineA;
+	}
+
+	public void setRedefineA(String redefineA) {
+		this.redefineA = redefineA;
+	}
+
+	public Boolean getEsCaracter() {
+		return esCaracter;
+	}
+
+	public void setEsCaracter(Boolean esCaracter) {
+		this.esCaracter = esCaracter;
+	}
+
+	public Boolean getEsNumerico() {
+		return esNumerico;
+	}
+
+	public void setEsNumerico(Boolean esNumerico) {
+		this.esNumerico = esNumerico;
 	}
 	
 
