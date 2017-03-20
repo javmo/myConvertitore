@@ -76,10 +76,12 @@ public void cuartoBarrido() {
 			this.obtengoLongConParentesis();
 		}
 			
-//------------------------------		
-//------------------------------		
+	
+	}else 
+	{
+		this.tratarErorr();	
 	}
-	this.tratarErorr();
+	
 }
 // obtengo longitud por medio del caso PIC X(02) o PIC 9(04)
 public void obtengoLongConParentesis() {
