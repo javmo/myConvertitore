@@ -38,7 +38,7 @@ public class Linea {
 					++index;
 					this.cuartoBarrido();
 					if(deboSeguir){
-//						this.quintoBarrido();
+						this.quintoBarrido();
 						if(deboSeguir){
 //							this.sextoBarrido();
 						}
@@ -48,6 +48,19 @@ public class Linea {
 		}
 				
 	}
+// Valida que el token anterior no tenga un punto porque sino seria fin de sentencia
+public void quintoBarrido() {
+	if(listaTokens.get(index-1).indexOf(".") != -1){
+		if((this.miCampo.esFiller) || (this.miCampo.esVarClasica)){
+			if(listaTokens.get(index) != "VALUE"){
+				this.tratarErorr();
+			}
+		}
+		this.tratarErorr();
+	}else {
+		this.tratarErorr();
+	}
+}
 public void cuartoBarrido() {
 	String[] numeroDeOccurs = (this.listaTokens.get(index).split("\\."));
 //------------------------------	
@@ -68,7 +81,7 @@ public void cuartoBarrido() {
 			this.tratarErorr();
 		}
 //------------------------------		
-	}else if((this.miCampo.esFiller) || (this.miCampo.esVarClasica)  ){
+	}else if((this.miCampo.esFiller) || (this.miCampo.esVarClasica)){
 		if ((listaTokens.get(index).indexOf("(")) == -1){
 			this.obtengoLongSinParentesis();
 		}
