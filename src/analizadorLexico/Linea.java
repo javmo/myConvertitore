@@ -23,7 +23,7 @@ public class Linea {
 					
 	}
 // analiza los tokens y los transforma en un campo	
-	public void generarCampo(){
+	public Campo generarCampo(){
 		miCampo = new Campo();
 		miCampo.inicializarCampo();
 		
@@ -48,7 +48,7 @@ public class Linea {
 				}
 			}
 		}
-				
+		return miCampo;		
 	}
 // se setea el value que vino en la sentencia de la copy	
 public void sextoBarrido() {
