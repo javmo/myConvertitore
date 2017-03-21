@@ -11,9 +11,11 @@ import java.io.BufferedReader;
 public class Lector {
 	 Linea lineaLeida = new Linea();
 	 String linea= new String();
+	 List<analizadorLexico.Campo> campos= new ArrayList<analizadorLexico.Campo>();	 
 	 
+     public void Leer () {
 	 try(BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {	
-		    List<analizadorLexico.Campo> campos= new ArrayList<analizadorLexico.Campo>();
+		    
 		    
 		    linea = br.readLine();
 		    
@@ -30,8 +32,7 @@ public class Lector {
 	}
 		    
 		    
-		   
-
+		  
 	
 		}
 	 
