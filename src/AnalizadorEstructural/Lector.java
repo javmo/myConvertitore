@@ -13,10 +13,15 @@ public class Lector {
 	 String linea= new String();
 	 List<analizadorLexico.Campo> campos= new ArrayList<analizadorLexico.Campo>();	 
 	 
-     public void Leer () {
-	 try(BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {	
-		    
-		    
+     public void Leer () throws Exception {
+	 try(BufferedReader br = new BufferedReader(new FileReader("D:\\Users\\Serial\\Desktop\\CTest.txt"))) {	
+		    char c;
+		    int a;
+		    c= (char) br.read();
+		    do {
+		    a=	br.read();	
+		    } while (a==32);
+		 
 		    linea = br.readLine();
 		    
 		    while (linea != null){
