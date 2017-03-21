@@ -38,9 +38,11 @@ public class Linea {
 					++index;
 					this.cuartoBarrido();
 					if(deboSeguir){
+						++index;
 						this.quintoBarrido();
 						if(deboSeguir){
-//							this.sextoBarrido();
+							++index;
+							this.sextoBarrido();
 						}
 					}
 				}
@@ -48,20 +50,38 @@ public class Linea {
 		}
 				
 	}
+// se setea el value que vino en la sentencia de la copy	
+public void sextoBarrido() {
+	if(listaTokens.get(index).indexOf(".") != -1){
+		this.setDeboSeguir(false);
+	}
+	 String[] inforamcionPura = this.listaTokens.get(index).split("\\'"); 
+	
+	this.miCampo.setInformacion(inforamcionPura[1]);
+	
+	
+}
 // Valida que el token anterior no tenga un punto porque sino seria fin de sentencia
 public void quintoBarrido() {
-	if(listaTokens.get(index-1).indexOf(".") != -1){
-		if((this.miCampo.esFiller) || (this.miCampo.esVarClasica)){
-			if(listaTokens.get(index) != "VALUE"){
-				this.tratarErorr();
-			}
-		}
-		this.tratarErorr();
-	}else {
+	if(listaTokens.get(index).indexOf(".") != -1){
 		this.tratarErorr();
 	}
+	
+	String value = "VALUE";
+	if((this.miCampo.esFiller) || (this.miCampo.esVarClasica)){ 
+		
+		if(!(listaTokens.get(index).equals(value))){
+			this.tratarErorr();
+		}		
+	}else{
+		this.tratarErorr();	
+	}
+	
 }
 public void cuartoBarrido() {
+	if(listaTokens.get(index).indexOf(".") != -1){
+		this.setDeboSeguir(false);
+	}
 	String[] numeroDeOccurs = (this.listaTokens.get(index).split("\\."));
 //------------------------------	
 	if(this.miCampo.esOccurs){
@@ -128,6 +148,9 @@ public void obtengoLongSinParentesis() {
 //Tercer barrido se contempla que sea una variable normal, una varaible con occurs
 //, el valor si es un booleano, si hay una variable que redefine a otra o si es un super nivel
 public void tercerBarrido() {
+	if(listaTokens.get(index).indexOf(".") != -1){
+		this.setDeboSeguir(false);
+	}
 	
 	switch (this.listaTokens.get(index)) {
 		case "PIC":
@@ -164,14 +187,18 @@ public void segundoBarrido() {
 	if(this.isNotString(listaTokens.get(index))) {
 		this.tratarErorr();
 	}
-	if (listaTokens.get(index) == "FILLER"){
+	if(listaTokens.get(index).indexOf(".") != -1){
+		this.miCampo.setEsSupernivel(true);
+	}
+	String filler= "FILLER";
+	if (listaTokens.get(index).equals(filler) ){
 		this.miCampo.setEsFiller(true);
 	}
 	this.miCampo.setNombre(listaTokens.get(index));
 }
 // primer barrido se analiza el nivel del campo debe ser un entero
 	public void primerBarrido() {
-	if (this.listaTokens.get(index) == "\\." || this.isNotNumeric(listaTokens.get(index))){
+	if (this.isNotNumeric(listaTokens.get(index))){
 		this.tratarErorr();
 	}
 	this.miCampo.setNivel(Integer.parseInt(listaTokens.get(index)));
@@ -195,6 +222,9 @@ public void segundoBarrido() {
 				System.out.println("Se registro un token value y no es un nivel booleano o se registro un token redefine y es booleano");
 			case 3:
 				System.out.println("Se registro un tipo de dato invalido, el numero de occurs no es nuemrico, el campo a redefinir no esta informado correctamente, es super nivel y no se informa el fin de sentencia");	
+			case 4:
+				System.out.println("Se registro un token que no es VALUE o no se especifico el fin de sentencia con el '.' ");	
+			
 		}
 	}
 	
