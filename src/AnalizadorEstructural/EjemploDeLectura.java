@@ -6,10 +6,12 @@ public class EjemploDeLectura {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ListaCampos lee = new	ListaCampos();
+		Estructura lee = new	Estructura();
 		 try{
 			 
-		 lee.ListarCampos();
+		 lee.generarListaDeCampos();
+		 lee.BuscarPadre();
+		 
 		 
 		 }catch(Exception e){
 			 System.out.println("Error de lectura");;

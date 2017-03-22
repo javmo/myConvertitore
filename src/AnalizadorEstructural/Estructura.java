@@ -72,6 +72,49 @@ public class Estructura {
 		}
 		
 	}
+	public void BuscarPadre(){
+		for (int i=0;i<this.listaDeCampos.size();i++ ){
+			
+		if (this.listaDeCampos.get(i).getEsOccurs()){
+			
+			BuscarHijitos(i);
+			ClonarHijitos(i);
+		}
+		
+		}
+			
+	}
+	public void BuscarHijitos(int indice){
+
+		Campo campoOccurse = this.listaDeCampos.get(indice);
+		int nivel = campoOccurse.getNivel();
+		indice=indice+1;
+		
+	    while (this.listaDeCampos.get(indice).getNivel()< nivel && indice <= this.listaDeCampos.size()){
+	    	añadirOccurse(campoOccurse,this.listaDeCampos.get(indice));
+			indice++;
+		}
+			
+		
+	}
+	public void ClonarHijitos(int indicePadre){
+		int tamaño =this.listaDeCampos.get(indicePadre).getOccursDeCampos().size();
+		int contador=0;
+		while (contador < this.listaDeCampos.get(indicePadre).getOccursDeCampos().get(indicePadre).getCantidadDeOccurs()){
+		for (int J=0;J<tamaño;J++) {
+			this.listaDeCampos.get(indicePadre).getOccursDeCampos().add(this.listaDeCampos.get(indicePadre).getOccursDeCampos().get(J));
+		}
+		contador++;
+		}
+		
+		
+		
+	}
+	public void añadirOccurse (Campo c1 , Campo c2){
+		c1.agregarCampoDeOccurs(c2);
+		
+	}
+	
 
 
 	public Linea getLineaLeida() {
