@@ -39,31 +39,31 @@ public class Estructura {
 			    int a;
 			    Campo nuevoCampo ;
 			    primerCaracter= (char) br.read();
-			    StringBuilder primerLinea = new StringBuilder();
+			    StringBuilder lineaPura = new StringBuilder();
 			    
-			    while (br.ready()){
+			    while (linea!=null){
 			    do {
 			    a=	br.read();	
 			    primerCaracter=(char) a;
-			    } while (a==32&&br.ready());
+			    } while (a==32&& a!='\u0000');
 			    
 			    
 			    linea = br.readLine();
 			    if (linea != null){
-			    primerLinea.append(primerCaracter);
-			    primerLinea.append(linea);
+			    lineaPura.append(primerCaracter);
+			    lineaPura.append(linea);
 			    lineaLeida.setUpLinea();
-		    	lineaLeida.setLineaAnalizar(linea);
+		    	lineaLeida.setLineaAnalizar(lineaPura.toString());
 		    	lineaLeida.obtenerTokens();
 		    	nuevoCampo=lineaLeida.generarCampo();
 		    	if (nuevoCampo.getNivel()!=88){
 		    	listaDeCampos.add(nuevoCampo);
 		    	}
-			    primerLinea = new StringBuilder();
+			    lineaPura = new StringBuilder();
 			   
 			    }
 			    }	   
-			     
+			     br.close();
 			    
 			    
 		 }catch  (Exception e)  {
@@ -91,7 +91,7 @@ public class Estructura {
 		int nivel = campoOccurse.getNivel();
 		indice=indice+1;
 		
-	    while (this.listaDeCampos.get(indice).getNivel()< nivel && indice <= this.listaDeCampos.size()){
+	    while (this.listaDeCampos.get(indice).getNivel()> nivel && indice <= this.listaDeCampos.size()){
 	    	añadirOccurse(campoOccurse,this.listaDeCampos.get(indice));
 			indice++;
 		}

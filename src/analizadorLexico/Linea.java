@@ -48,6 +48,7 @@ public class Linea {
 				}
 			}
 		}
+		index = 0;
 		return miCampo;		
 	}
 // se setea el value que vino en la sentencia de la copy	
@@ -190,10 +191,12 @@ public void segundoBarrido() {
 	}
 	if(listaTokens.get(index).indexOf(".") != -1){
 		this.miCampo.setEsSupernivel(true);
+		this.setDeboSeguir(false);
 	}
 	String filler= "FILLER";
 	if (listaTokens.get(index).equals(filler) ){
 		this.miCampo.setEsFiller(true);
+		this.setDeboSeguir(false);
 	}
 	this.miCampo.setNombre(listaTokens.get(index));
 }
