@@ -165,6 +165,7 @@ public void tercerBarrido() {
 			if(this.miCampo.getNivel() != 88){
 				tratarErorr();
 			}
+			this.setDeboSeguir(false);
 			break;
 		case "REDEFINE":
 			if(this.miCampo.getNivel() == 88){
