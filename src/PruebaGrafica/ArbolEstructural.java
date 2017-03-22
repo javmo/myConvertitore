@@ -8,12 +8,13 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import AnalizadorEstructural.Estructura;
 import analizadorLexico.Campo;
 
 public class ArbolEstructural extends JTree {
 
 	List<Campo> listaCampos;
-	Object estructura;
+	Estructura estructura;
 	JTree arbol;
 	
 //-----------------------------------------------------------------//	
@@ -38,6 +39,7 @@ public class ArbolEstructural extends JTree {
 	}
 	
 	public void insertarCampo(Campo nodoAInsertar, Campo nodoAlQuePertenece){
+		DefaultMutableTreeNode nodoAInsertar = new DefaultMutableTreeNode((nodoAInsertar.getNombre());
 		
 	
 		
