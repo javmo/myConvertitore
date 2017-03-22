@@ -34,15 +34,18 @@ public class Estructura {
 // 	Genera la lsita de campos, leyendo linea por linea enviadnoals al analizador lexico y obteniendo el campo
 	public void generarListaDeCampos() throws Exception{
 		 try(BufferedReader br = new BufferedReader(new FileReader(rutaDelArchivo))) {	
+			 
 			    char primerCaracter;
 			    int a;
+			    Campo nuevoCampo ;
 			    primerCaracter= (char) br.read();
-			    StringBuilder primerLinea = new StringBuilder();		  
+			    StringBuilder primerLinea = new StringBuilder();
 			    
+			    while (br.ready()){
 			    do {
 			    a=	br.read();	
 			    primerCaracter=(char) a;
-			    } while (a==32);
+			    } while (a==32&&br.ready());
 			    
 			    
 			    linea = br.readLine();
@@ -52,14 +55,12 @@ public class Estructura {
 			    lineaLeida.setUpLinea();
 		    	lineaLeida.setLineaAnalizar(linea);
 		    	lineaLeida.obtenerTokens();
-		    	linea = br.readLine();
-			    		    
-			    while (linea != null){
-			    	lineaLeida.setUpLinea();
-			    	lineaLeida.setLineaAnalizar(linea);
-			    	lineaLeida.obtenerTokens();
-			    	listaDeCampos.add(lineaLeida.generarCampo());
-			    	linea = br.readLine();
+		    	nuevoCampo=lineaLeida.generarCampo();
+		    	if (nuevoCampo.getNivel()!=88){
+		    	listaDeCampos.add(nuevoCampo);
+		    	}
+			    primerLinea = new StringBuilder();
+			   
 			    }
 			    }	   
 			     
