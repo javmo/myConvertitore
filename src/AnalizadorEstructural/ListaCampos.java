@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import analizadorLexico.Campo;
 import analizadorLexico.Linea;
 
 
@@ -53,4 +55,9 @@ public List<analizadorLexico.Campo> ListarCampos() throws Exception{
 	 return campos;
 	 
 }
+public void añadirOccurse (Campo c1 , Campo c2){
+	c1.agregarCampoDeOccurs(c2);
 }
+	
+}
+
