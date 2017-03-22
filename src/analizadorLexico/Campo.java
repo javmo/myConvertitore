@@ -171,6 +171,9 @@ public class Campo {
 	public void setEsNumerico(Boolean esNumerico) {
 		this.esNumerico = esNumerico;
 	}
+	public void agregarCampoDeOccurs(Campo campoAAgregar){
+		this.occursDeCampos.add(campoAAgregar);
+	}
 	
 
 }
