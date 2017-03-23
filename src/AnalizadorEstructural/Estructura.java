@@ -106,6 +106,35 @@ public class Estructura {
 
 
 	}
+	public void cargarSuper(Campo cSuper){
+		int miNivel= cSuper.getNivel();
+		int posi =this.listaDeCampos.indexOf(cSuper)+1;
+		Campo cDepend=this.listaDeCampos.get(posi);
+		int nivelUltimo =cDepend.getNivel();
+		
+		while (posi < this.listaDeCampos.size() && miNivel > this.listaDeCampos.get(posi).getNivel() ){
+			
+			cDepend =this.listaDeCampos.get(posi);
+			if(cDepend.getNivel() <= nivelUltimo){
+				cSuper.agregarDependencia(cDepend);
+				nivelUltimo =this.listaDeCampos.get(posi).getNivel();
+			}
+			posi++;
+			
+			
+		}
+		
+		
+	}
+	public void BuscarSuper(Campo cSuper){
+		for (Campo campo : cSuper.getListaDeDependencias()) {
+			if (campo.getEsSupernivel()){
+				cargarSuper(campo);
+				
+			}
+		}
+		
+	}
 	public void aniadirOccurse (Campo c1 , Campo c2){
 		c1.agregarCampoDeOccurs(c2);
 
