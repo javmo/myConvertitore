@@ -14,7 +14,7 @@ public class Estructura {
 	String linea=new String();
 	List<Campo> listaDeCampos;
 	String rutaDelArchivo;
-// constructor de Clase Estructura	
+	// constructor de Clase Estructura	
 	public Estructura(){
 		this.lineaLeida = new Linea();
 		this.linea= new String();
@@ -30,92 +30,94 @@ public class Estructura {
 	public void setListaDeCampos(List<Campo> listaDeCampos) {
 		this.listaDeCampos = listaDeCampos;
 	}
-	
-// 	Genera la lsita de campos, leyendo linea por linea enviadnoals al analizador lexico y obteniendo el campo
+
+	// 	Genera la lsita de campos, leyendo linea por linea enviadnoals al analizador lexico y obteniendo el campo
 	public void generarListaDeCampos() throws Exception{
-		 try(BufferedReader br = new BufferedReader(new FileReader(rutaDelArchivo))) {	
-			 
-			    char primerCaracter;
-			    int a;
-			    Campo nuevoCampo ;
-			    primerCaracter= (char) br.read();
-			    StringBuilder lineaPura = new StringBuilder();
-			    
-			    while (linea!=null){
-			    do {
-			    a=	br.read();	
-			    primerCaracter=(char) a;
-			    } while (a==32&& a!='\u0000');
-			    
-			    
-			    linea = br.readLine();
-			    if (linea != null){
-			    lineaPura.append(primerCaracter);
-			    lineaPura.append(linea);
-			    lineaLeida.setUpLinea();
-		    	lineaLeida.setLineaAnalizar(lineaPura.toString());
-		    	lineaLeida.obtenerTokens();
-		    	nuevoCampo=lineaLeida.generarCampo();
-		    	if (nuevoCampo.getNivel()!=88){
-		    	listaDeCampos.add(nuevoCampo);
-		    	}
-			    lineaPura = new StringBuilder();
-			   
-			    }
-			    }	   
-			     br.close();
-			    
-			    
-		 }catch  (Exception e)  {
-			 
-	    throw new Exception();
-			
+		try(BufferedReader br = new BufferedReader(new FileReader(rutaDelArchivo))) {	
+
+			char primerCaracter;
+			int a;
+			Campo nuevoCampo ;
+			primerCaracter= (char) br.read();
+
+			//TODO: investigar funcion trim() en strings
+			while (linea!=null){
+				do {
+					a=	br.read();	
+					primerCaracter=(char) a;
+				} while (a==32 && a!='\u0000');
+
+
+				linea = br.readLine();
+				if (linea != null){
+					StringBuilder lineaPura = new StringBuilder();
+					lineaPura.append(primerCaracter);
+					lineaPura.append(linea);
+					lineaLeida.setUpLinea();// esto es clave
+					lineaLeida.setLineaAnalizar(lineaPura.toString());
+					lineaLeida.obtenerTokens();
+					nuevoCampo=lineaLeida.generarCampo();
+					if (nuevoCampo.getNivel() != 88){
+						listaDeCampos.add(nuevoCampo);
+					}
+
+				}
+			}	   
+			br.close();
+
+
+		}catch  (Exception e)  {
+
+			throw new Exception();
+
 		}
-		
+
 	}
 	public void BuscarPadre(){
 		for (int i=0;i<this.listaDeCampos.size();i++ ){
-			
-		if (this.listaDeCampos.get(i).getEsOccurs()){
-			
-			BuscarHijitos(i);
-			ClonarHijitos(i);
+			if (this.listaDeCampos.get(i).getEsOccurs()){
+				BuscarHijitos(i);
+				ClonarHijitos(i);
+			}
 		}
-		
-		}
-			
 	}
 	public void BuscarHijitos(int indice){
 
 		Campo campoOccurse = this.listaDeCampos.get(indice);
 		int nivel = campoOccurse.getNivel();
 		indice=indice+1;
-		
-	    while (this.listaDeCampos.get(indice).getNivel()> nivel && indice <= this.listaDeCampos.size()){
-	    	añadirOccurse(campoOccurse,this.listaDeCampos.get(indice));
+
+		while (this.listaDeCampos.get(indice).getNivel()> nivel && indice < this.listaDeCampos.size()){
+			aniadirOccurse(campoOccurse,this.listaDeCampos.get(indice));
 			indice++;
 		}
-			
-		
+
+
 	}
 	public void ClonarHijitos(int indicePadre){
-		int tamaño =this.listaDeCampos.get(indicePadre).getOccursDeCampos().size();
-		int contador=0;
-		while (contador < this.listaDeCampos.get(indicePadre).getOccursDeCampos().get(indicePadre).getCantidadDeOccurs()){
-		for (int J=0;J<tamaño;J++) {
-			this.listaDeCampos.get(indicePadre).getOccursDeCampos().add(this.listaDeCampos.get(indicePadre).getOccursDeCampos().get(J));
+		Campo padre = this.listaDeCampos.get(indicePadre);
+		int tamanio = padre.getOccursDeCampos().size();
+		this.listaDeCampos.get(indicePadre);
+		int contador = 0;
+		// crear nueva lista vacia
+		// for de 0 a cantidad de occurs
+		// copiar los elementos -> generar una lista a partir de otra y un constructor que reciba la misma clase new Campo(campo)
+		
+		while (contador < padre.getCantidadDeOccurs()){
+			for (int J=0;J<tamanio;J++) {
+				padre.getOccursDeCampos().add(padre.getOccursDeCampos().get(J));
+			}
+			contador++;
 		}
-		contador++;
-		}
-		
-		
-		
+
+
+
 	}
-	public void añadirOccurse (Campo c1 , Campo c2){
+	public void aniadirOccurse (Campo c1 , Campo c2){
 		c1.agregarCampoDeOccurs(c2);
-		
+
 	}
-	
+
 
 
 	public Linea getLineaLeida() {

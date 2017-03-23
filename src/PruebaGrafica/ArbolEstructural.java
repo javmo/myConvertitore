@@ -31,7 +31,7 @@ public class ArbolEstructural extends JTree {
 	
 	
 	public void definirRoot(){
-/**Definimos cual será el directorio principal o la raiz de nuestro arbol*/
+/**Definimos cual serï¿½ el directorio principal o la raiz de nuestro arbol*/
 		 DefaultMutableTreeNode campoRoot = new DefaultMutableTreeNode(estructura);
 /**Definimos el modelo donde se agregaran los nodos*/
 		  DefaultTreeModel modelo = new DefaultTreeModel(campoRoot);
@@ -52,7 +52,7 @@ public class ArbolEstructural extends JTree {
 	
 	
 	public void insertarCampo(Campo nodoAInsertar, Campo nodoAlQuePertenece){
-		DefaultMutableTreeNode nodoAInsertar = new DefaultMutableTreeNode((nodoAInsertar.getNombre());
+		DefaultMutableTreeNode nodoAInsertar2 = new DefaultMutableTreeNode(nodoAInsertar.getNombre());
 		
 	
 		

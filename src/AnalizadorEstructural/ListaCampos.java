@@ -55,7 +55,7 @@ public List<analizadorLexico.Campo> ListarCampos() throws Exception{
 	 return campos;
 	 
 }
-public void añadirOccurse (Campo c1 , Campo c2){
+public void aniadirOccurse (Campo c1 , Campo c2){
 	c1.agregarCampoDeOccurs(c2);
 }
 	

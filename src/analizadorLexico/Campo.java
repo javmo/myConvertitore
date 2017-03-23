@@ -1,5 +1,6 @@
 package analizadorLexico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Campo {
@@ -9,29 +10,20 @@ public class Campo {
 	int longitud;
 	String tipoDeDato;
 	String informacion;
-	List<Campo> occursDeCampos;
+	List<Campo> occursDeCampos = new ArrayList<Campo>();
 	int cantidadDeOccurs;
 	String redefineA;
 //---------Booleanos seteados en el segundo barrido------------//	
-	Boolean esFiller;
+	Boolean esFiller = false;
 //---------Booleanos seteados en el tercer barrido------------//	
-	Boolean esSupernivel;
-	Boolean esOccurs;
-	Boolean esRedefine;
-	Boolean esVarClasica;
+	Boolean esSupernivel = false;
+	Boolean esOccurs = false;
+	Boolean esRedefine = false;
+	Boolean esVarClasica = false;
 //---------Booleanos seteados en el cuarto barrido------------//
-	Boolean esCaracter;
-	Boolean esNumerico;
-//-----------------------------------------------------------//	
-	public void inicializarCampo(){
-		this.setEsFiller(false);
-		this.setEsOccurs(false);
-		this.setEsRedefine(false);
-		this.setEsSupernivel(false);
-		this.setEsVarClasica(false);
-		this.setEsCaracter(false);
-		this.setEsNumerico(false);
-	}
+	Boolean esCaracter = false;
+	Boolean esNumerico = false;
+//-----------------------------------------------------------//
 	
 	public void setNombre(String nombre){
 		this.nombre = nombre;

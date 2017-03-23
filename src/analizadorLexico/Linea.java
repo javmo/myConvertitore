@@ -2,6 +2,7 @@ package analizadorLexico;
 
 import java.util.List;
 
+
 import java.util.Arrays;
 
 public class Linea {
@@ -10,6 +11,7 @@ public class Linea {
 	String[] arrayTokens;
 	List<String> listaTokens;
 	Campo miCampo;
+	
 	Boolean deboSeguir;
 	int index;
 	
@@ -18,14 +20,13 @@ public class Linea {
 //-------------------------------------------------------------------//	
 
 	public void obtenerTokens(){
-		this.setArrayTokens((this.getLineaAnalizar()).split("\\s+"));
+		this.setArrayTokens(this.getLineaAnalizar().split("\\s+"));
 		this.setListaTokens(Arrays.asList(this.getArrayTokens()));
 					
 	}
 // analiza los tokens y los transforma en un campo	
 	public Campo generarCampo(){
 		miCampo = new Campo();
-		miCampo.inicializarCampo();
 		
 		this.primerBarrido();
 		if(deboSeguir){
