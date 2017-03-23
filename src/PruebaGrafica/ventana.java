@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JTree;
 
+import AnalizadorEstructural.Estructura;
+
 public class ventana {
 
 	private JFrame frame;
@@ -23,7 +25,7 @@ public class ventana {
 	private JButton btnGenerarTramaCoordinador;
 	private JTextField txtTramaCoordinador;
 	private JButton btnSeleccionarArchivo;
-	private JTree tree;
+	private ArbolEstructural arbolito;
 
 	/**
 	 * Launch the application.
@@ -109,8 +111,21 @@ public class ventana {
 		gbc_btnSeleccionarArchivo.gridx = 0;
 		gbc_btnSeleccionarArchivo.gridy = 6;
 		frame.getContentPane().add(btnSeleccionarArchivo, gbc_btnSeleccionarArchivo);
-		
-		tree = new JTree();
+//------------------------------------------------------
+		Estructura lee = new	Estructura();
+		 try{
+		 lee.setRutaDelArchivo("D:\\Users\\jmorixe\\Documents\\Trabajos\\ASOL\\ID6548-Ciclo de vida\\copyprueba.txt");
+		 lee.generarListaDeCampos();
+		 
+		 }catch(Exception e){
+			 e.printStackTrace();
+			 System.out.println("Error de lectura");
+			 
+		 }	
+		 
+		JTree tree = new JTree();
+		arbolito = new ArbolEstructural(lee);
+		tree = arbolito.generarArbol();
 		GridBagConstraints gbc_tree = new GridBagConstraints();
 		gbc_tree.fill = GridBagConstraints.BOTH;
 		gbc_tree.gridx = 0;

@@ -35,10 +35,7 @@ public class Estructura {
 	public void generarListaDeCampos() throws Exception{
 		try(BufferedReader br = new BufferedReader(new FileReader(rutaDelArchivo))) {	
 
-			char primerCaracter;
-			int a;
 			Campo nuevoCampo ;
-			primerCaracter= (char) br.read();
 
 			//TODO: investigar funcion trim() en strings
 			while (lineaPura!=null){
@@ -112,7 +109,7 @@ public class Estructura {
 		Campo cDepend=this.listaDeCampos.get(posi);
 		int nivelUltimo =cDepend.getNivel();
 		
-		while (posi < this.listaDeCampos.size() && miNivel > this.listaDeCampos.get(posi).getNivel() ){
+		while (posi < this.listaDeCampos.size() && miNivel < this.listaDeCampos.get(posi).getNivel() ){
 			
 			cDepend =this.listaDeCampos.get(posi);
 			if(cDepend.getNivel() <= nivelUltimo){
@@ -124,7 +121,7 @@ public class Estructura {
 			
 		}
 		
-		
+		BuscarSuper(cSuper);
 	}
 	public void BuscarSuper(Campo cSuper){
 		for (Campo campo : cSuper.getListaDeDependencias()) {
