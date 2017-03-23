@@ -44,9 +44,8 @@ public class Estructura {
 			while (lineaPura!=null){
 
 				lineaPura = br.readLine();
-				lineaPura=lineaPura.trim();
 				if (lineaPura != null){
-
+					lineaPura=lineaPura.trim();
 					lineaLeida.setUpLinea();// esto es clave
 					lineaLeida.setLineaAnalizar(lineaPura);
 					lineaLeida.obtenerTokens();

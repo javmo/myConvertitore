@@ -10,6 +10,7 @@ public class Campo {
 	int longitud;
 	String tipoDeDato;
 	String informacion;
+	List<Campo> listaDeDependencias = new ArrayList<Campo>();
 	List<Campo> occursDeCampos = new ArrayList<Campo>();
 	int cantidadDeOccurs;
 	String redefineA;
@@ -167,5 +168,16 @@ public class Campo {
 		this.occursDeCampos.add(campoAAgregar);
 	}
 	
+	public void agregarDependencia(Campo dependenciaAAgregar){
+		this.occursDeCampos.add(dependenciaAAgregar);
+	}
+
+	public List<Campo> getListaDeDependencias() {
+		return listaDeDependencias;
+	}
+
+	public void setListaDeDependencias(List<Campo> listaDeDependencias) {
+		this.listaDeDependencias = listaDeDependencias;
+	}
 
 }
