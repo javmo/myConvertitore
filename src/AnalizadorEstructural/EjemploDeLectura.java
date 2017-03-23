@@ -8,14 +8,14 @@ public class EjemploDeLectura {
 		// TODO Auto-generated method stub
 		Estructura lee = new	Estructura();
 		 try{
-		 lee.setRutaDelArchivo("//Users//macuser//Desktop//copy.txt");
+		 lee.setRutaDelArchivo("D:\\Users\\Serial\\Desktop\\CTest.txt");
 		 lee.generarListaDeCampos();
 		 lee.BuscarPadre();
 		 
 		 
 		 }catch(Exception e){
 			 e.printStackTrace();
-			 System.out.println("Error de lectura");;
+			 System.out.println("Error de lectura");
 			 
 		 }		    	  
 		

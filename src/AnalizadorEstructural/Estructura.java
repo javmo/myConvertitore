@@ -11,13 +11,13 @@ import analizadorLexico.Linea;
 public class Estructura {
 
 	Linea lineaLeida;
-	String linea=new String();
+	String lineaPura=new String();
 	List<Campo> listaDeCampos;
 	String rutaDelArchivo;
 	// constructor de Clase Estructura	
 	public Estructura(){
 		this.lineaLeida = new Linea();
-		this.linea= new String();
+		this.lineaPura= new String();
 		this.rutaDelArchivo = new String();
 		this.listaDeCampos= new ArrayList<>();
 	}
@@ -41,20 +41,14 @@ public class Estructura {
 			primerCaracter= (char) br.read();
 
 			//TODO: investigar funcion trim() en strings
-			while (linea!=null){
-				do {
-					a=	br.read();	
-					primerCaracter=(char) a;
-				} while (a==32 && a!='\u0000');
+			while (lineaPura!=null){
 
+				lineaPura = br.readLine();
+				lineaPura=lineaPura.trim();
+				if (lineaPura != null){
 
-				linea = br.readLine();
-				if (linea != null){
-					StringBuilder lineaPura = new StringBuilder();
-					lineaPura.append(primerCaracter);
-					lineaPura.append(linea);
 					lineaLeida.setUpLinea();// esto es clave
-					lineaLeida.setLineaAnalizar(lineaPura.toString());
+					lineaLeida.setLineaAnalizar(lineaPura);
 					lineaLeida.obtenerTokens();
 					nuevoCampo=lineaLeida.generarCampo();
 					if (nuevoCampo.getNivel() != 88){
@@ -131,12 +125,12 @@ public class Estructura {
 
 
 	public String getLinea() {
-		return linea;
+		return lineaPura;
 	}
 
 
 	public void setLinea(String linea) {
-		this.linea = linea;
+		this.lineaPura = linea;
 	}
 
 
