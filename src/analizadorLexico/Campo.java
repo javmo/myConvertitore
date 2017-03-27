@@ -7,7 +7,7 @@ public class Campo {
 	
 	String nombre;
 	int nivel;
-	int longitud;
+	int longitud = 0;
 	String tipoDeDato;
 	String informacion;
 	List<Campo> listaDeDependencias = new ArrayList<Campo>();
@@ -178,6 +178,9 @@ public class Campo {
 
 	public void setListaDeDependencias(List<Campo> listaDeDependencias) {
 		this.listaDeDependencias = listaDeDependencias;
+	}
+	public void agregarLongitud(int longitud){
+		this.longitud= this.longitud+longitud;
 	}
 
 }

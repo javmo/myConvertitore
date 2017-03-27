@@ -44,8 +44,9 @@ public class ArbolEstructural extends JTree {
 	}
 //-----------------------------------------------------//
 	public void crearMesias(Campo campo, NodoCampo padre) {
-
+   
 		for (Campo campitoDepne : campo.getListaDeDependencias()) {
+		    campo.agregarLongitud(campitoDepne.getLongitud());
 			NodoCampo hijo = new NodoCampo(campitoDepne.getNombre());
 			padre.add(hijo);
 			this.recurrenciaSanta(campitoDepne, hijo);
@@ -66,6 +67,7 @@ public class ArbolEstructural extends JTree {
 
 	public void crearApostoles(Campo campo, NodoCampo padre) {
 		for (Campo apostol : campo.getOccursDeCampos()) {
+			campo.agregarLongitud(apostol.getLongitud());
 			NodoCampo apostolSanto = new NodoCampo(apostol.getNombre());
 			padre.add(apostolSanto);
 			this.recurrenciaSanta(apostol, apostolSanto);
