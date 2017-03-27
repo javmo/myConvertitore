@@ -36,22 +36,22 @@ public class Estructura {
 		try(BufferedReader br = new BufferedReader(new FileReader(rutaDelArchivo))) {	
 
 			Campo nuevoCampo ;
-
+			lineaPura = br.readLine();
+			lineaPura = lineaPura.trim();
 			//TODO: investigar funcion trim() en strings
-			while (lineaPura!=null){
-
-				lineaPura = br.readLine();
-				if (lineaPura != null){
-					lineaPura=lineaPura.trim();
+			while (lineaPura!=null && ! lineaPura.equals("")){
+			
 					lineaLeida.setUpLinea();// esto es clave
 					lineaLeida.setLineaAnalizar(lineaPura);
 					lineaLeida.obtenerTokens();
 					nuevoCampo=lineaLeida.generarCampo();
+					
 					if (nuevoCampo.getNivel() != 88){
 						listaDeCampos.add(nuevoCampo);
 					}
-
-				}
+					lineaPura = br.readLine();
+					lineaPura = lineaPura.trim();
+					
 			}	   
 			br.close();
 
@@ -77,7 +77,7 @@ public class Estructura {
 		int nivel = campoOccurse.getNivel();
 		indice=indice+1;
 
-		while (this.listaDeCampos.get(indice).getNivel()> nivel && indice < this.listaDeCampos.size()){
+		while (indice < this.listaDeCampos.size() && this.listaDeCampos.get(indice).getNivel()> nivel){
 			aniadirOccurse(campoOccurse,this.listaDeCampos.get(indice));
 			indice++;
 		}

@@ -165,7 +165,7 @@ public class Campo {
 		this.esNumerico = esNumerico;
 	}
 	public void agregarCampoDeOccurs(Campo campoAAgregar){
-		this.listaDeDependencias.add(campoAAgregar);
+		this.occursDeCampos.add(campoAAgregar);
 	}
 	
 	public void agregarDependencia(Campo dependenciaAAgregar){

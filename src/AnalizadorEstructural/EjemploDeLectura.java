@@ -8,9 +8,9 @@ public class EjemploDeLectura {
 		// TODO Auto-generated method stub
 		Estructura lee = new	Estructura();
 		 try{
-		 lee.setRutaDelArchivo("D:\\Users\\jmorixe\\Documents\\Trabajos\\ASOL\\ID6548-Ciclo de vida\\copyprueba.txt");
+		 lee.setRutaDelArchivo("D:\\Users\\Serial\\Desktop\\CTest.txt");
 		 lee.generarListaDeCampos();
-//		 lee.BuscarPadre();
+ 		 lee.BuscarPadre();
 		 lee.cargarSuper(lee.getListaDeCampos().get(0));
 		 
 		 }catch(Exception e){
