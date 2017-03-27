@@ -3,8 +3,11 @@ package PruebaGrafica;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.BoxLayout;
@@ -17,6 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTree;
 
 import AnalizadorEstructural.Estructura;
+import java.awt.List;
+import javax.swing.JDesktopPane;
 
 public class ventana {
 
@@ -39,6 +44,12 @@ public class ventana {
 //-----------------------------
 					EjemploJFileChooser frame = new EjemploJFileChooser();
                     frame.setVisible(true);
+//-----------------------------
+
+              
+                
+                    
+                    
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -58,13 +69,13 @@ public class ventana {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 508, 482);
+		frame.setBounds(100, 100, 508, 533);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JButton btnGenerarTrama = new JButton("Generar trama backend");
@@ -116,6 +127,8 @@ public class ventana {
 		 try{
 		 lee.setRutaDelArchivo("D:\\Users\\jmorixe\\Documents\\Trabajos\\ASOL\\ID6548-Ciclo de vida\\copyprueba.txt");
 		 lee.generarListaDeCampos();
+		 lee.BuscarPadre();
+		 lee.cargarSuper(lee.getListaDeCampos().get(0));
 		 
 		 }catch(Exception e){
 			 e.printStackTrace();
@@ -125,13 +138,20 @@ public class ventana {
 		 
 		JTree tree = new JTree();
 		arbolito = new ArbolEstructural(lee);
-		tree = arbolito.generarArbol();
+		tree = arbolito.generarArbol(lee.getListaDeCampos().get(0));
+		
+        JScrollPane pane = new JScrollPane(tree);
+        pane.setPreferredSize(new Dimension(200, 400));
+		
 		GridBagConstraints gbc_tree = new GridBagConstraints();
 		gbc_tree.fill = GridBagConstraints.BOTH;
 		gbc_tree.gridx = 0;
 		gbc_tree.gridy = 12;
 		frame.getContentPane().add(tree, gbc_tree);
+		
+		
+		
+
 
 	}
-
 }

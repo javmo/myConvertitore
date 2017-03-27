@@ -50,7 +50,11 @@ public class Estructura {
 						listaDeCampos.add(nuevoCampo);
 					}
 					lineaPura = br.readLine();
-					lineaPura = lineaPura.trim();
+					if (lineaPura!=null){
+						lineaPura = lineaPura.trim();	
+					}
+					
+					
 					
 			}	   
 			br.close();
@@ -88,7 +92,7 @@ public class Estructura {
 		Campo padre = this.listaDeCampos.get(indicePadre);
 		int tamanio = padre.getOccursDeCampos().size();
 		this.listaDeCampos.get(indicePadre);
-		int contador = 0;
+		int contador = 1;
 		// crear nueva lista vacia
 		// for de 0 a cantidad de occurs
 		// copiar los elementos -> generar una lista a partir de otra y un constructor que reciba la misma clase new Campo(campo)
