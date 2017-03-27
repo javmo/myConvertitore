@@ -14,6 +14,7 @@ public class Estructura {
 	String lineaPura=new String();
 	List<Campo> listaDeCampos;
 	String rutaDelArchivo;
+	String trama;
 	// constructor de Clase Estructura	
 	public Estructura(){
 		this.lineaLeida = new Linea();
@@ -134,6 +135,17 @@ public class Estructura {
 				
 			}
 		}
+		
+	}
+	public void CargarTrama(String tramita, Campo campoPadre){
+		int comienza=0;
+		this.trama = trama;
+		String valor;
+		for (Campo campoARellenar : campoPadre.getListaDeDependencias()){
+			valor =  this.trama.substring(comienza,campoARellenar.getLongitud() - 1);
+			campoARellenar.setInformacion(valor);	
+		}
+		
 		
 	}
 	public void aniadirOccurse (Campo c1 , Campo c2){
