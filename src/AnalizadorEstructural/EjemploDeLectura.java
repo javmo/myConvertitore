@@ -8,11 +8,11 @@ public class EjemploDeLectura {
 		// TODO Auto-generated method stub
 		Estructura lee = new	Estructura();
 		 try{
-		 lee.setRutaDelArchivo("D:\\Users\\jmorixe\\Documents\\Trabajos\\ASOL\\ID6548-Ciclo de vida\\copyprueba.txt");
+		 lee.setRutaDelArchivo("D:\\Users\\Serial\\Desktop\\CTest.txt");
 		 lee.generarListaDeCampos();
  		 lee.BuscarPadre();
 		 lee.cargarSuper(lee.getListaDeCampos().get(0));
-		 lee.CargarTrama("");
+		 lee.CargarTrama("S1234567895");
 		 }catch(Exception e){
 			 e.printStackTrace();
 			 System.out.println("Error de lectura");

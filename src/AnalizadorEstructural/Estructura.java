@@ -141,14 +141,35 @@ public class Estructura {
 		Campo campoPadre =this.listaDeCampos.get(0);
 		int comienza=0;
 		String tramaAux;
-		this.trama = trama;
+		this.trama = tramita;
 		
 		for (Campo campoARellenar : campoPadre.getListaDeDependencias()){
+			if (campoARellenar.getEsSupernivel()){
+				
+					comienza = cargarTramaDepend(tramita,campoARellenar,comienza);				
+			}else{	
 			tramaAux =  this.trama.substring(comienza,comienza+campoARellenar.getLongitud() - 1);
 			campoARellenar.setInformacion(tramaAux);
 			comienza=comienza+campoARellenar.getLongitud();
+			}
 		}
 		
+		
+	}
+	public int cargarTramaDepend(String tram,Campo campito,int comienza){
+		String tramaAux=tram;
+
+		for (Campo c :campito.getListaDeDependencias()){
+			if (c.getEsSupernivel()){
+				comienza= cargarTramaDepend(tram, c,comienza);
+			}else{
+				tramaAux =  this.trama.substring(comienza,comienza+c.getLongitud() - 1);
+				c.setInformacion(tramaAux);
+				comienza=comienza+c.getLongitud();
+			}
+		}
+		
+		return comienza;
 		
 	}
 	public void aniadirOccurse (Campo c1 , Campo c2){
