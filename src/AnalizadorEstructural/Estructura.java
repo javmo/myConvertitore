@@ -137,13 +137,16 @@ public class Estructura {
 		}
 		
 	}
-	public void CargarTrama(String tramita, Campo campoPadre){
+	public void CargarTrama(String tramita){
+		Campo campoPadre =this.listaDeCampos.get(0);
 		int comienza=0;
+		String tramaAux;
 		this.trama = trama;
-		String valor;
+		
 		for (Campo campoARellenar : campoPadre.getListaDeDependencias()){
-			valor =  this.trama.substring(comienza,campoARellenar.getLongitud() - 1);
-			campoARellenar.setInformacion(valor);	
+			tramaAux =  this.trama.substring(comienza,comienza+campoARellenar.getLongitud() - 1);
+			campoARellenar.setInformacion(tramaAux);
+			comienza=comienza+campoARellenar.getLongitud();
 		}
 		
 		

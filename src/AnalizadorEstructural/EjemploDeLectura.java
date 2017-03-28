@@ -12,7 +12,7 @@ public class EjemploDeLectura {
 		 lee.generarListaDeCampos();
  		 lee.BuscarPadre();
 		 lee.cargarSuper(lee.getListaDeCampos().get(0));
-		 
+		 lee.CargarTrama("");
 		 }catch(Exception e){
 			 e.printStackTrace();
 			 System.out.println("Error de lectura");
