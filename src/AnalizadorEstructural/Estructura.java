@@ -218,6 +218,39 @@ public class Estructura {
 		}
         
 	}
+	public String convertirCoordi(String tramaCoor) throws Exception{
+		char[] array=tramaCoor.toCharArray();
+		int j;
+		int inicio=0;
+		char caracterSeparacion;
+		String res="";
+		String aux;
+		String[] camposCoor;
+		for (int i=0;i<tramaCoor.length();i++){
+			j=i+1;
+			if (array[i]=='D' && array[j]=='H'){
+			inicio = j+1; 	
+			}
+		}
+		if (inicio==0){
+			throw new Exception ("Error de trama, no existe DH dentro de la trama del coordinador");		
+			
+		}else {
+			String tramaCoorAux;
+			inicio=inicio+5;
+			tramaCoorAux = tramaCoor.substring(inicio);
+			caracterSeparacion = tramaCoor.charAt(tramaCoor.length() - 2);
+			aux= ""+ caracterSeparacion;
+			camposCoor = tramaCoorAux.split(aux);
+			for (int i=0;i<camposCoor.length;i++){
+				res=res+camposCoor[i];	
+			}
+			
+		 return res;
+			
+		}
+		
+	}
 	
 	public void recursividadjaviana(Campo hijo){
 		

@@ -13,13 +13,12 @@ public class EjemploDeLectura {
  		 lee.BuscarPadre();
 		 lee.cargarSuper(lee.getListaDeCampos().get(0));
 		 lee.calcularLongitud(lee.getListaDeCampos().get(0));
-		 lee.CargarTrama("S1234567895");
+		 lee.CargarTrama(lee.convertirCoordi("[asjfhasfjashdfjashdklashdjkashfsdjfahsfDH12345Sç1234567895ç]"));
 		 }catch(Exception e){
 			 e.printStackTrace();
 			 System.out.println(e.getMessage());
 			 
 		 }		    	  
-		
 			
 	}
 
