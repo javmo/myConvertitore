@@ -12,6 +12,7 @@ public class EjemploDeLectura {
 		 lee.generarListaDeCampos();
  		 lee.BuscarPadre();
 		 lee.cargarSuper(lee.getListaDeCampos().get(0));
+		 lee.calcularLongitud(lee.getListaDeCampos().get(0));
 		 lee.CargarTrama("S1234567895");
 		 }catch(Exception e){
 			 e.printStackTrace();

@@ -142,7 +142,7 @@ public class Estructura {
 		int comienza=0;
 		String tramaAux;
 		this.trama = tramita;
-		
+		if (tramita.length()==campoPadre.getLongitud()){
 		for (Campo campoARellenar : campoPadre.getListaDeDependencias()){
 			if (campoARellenar.getEsSupernivel()){
 				
@@ -152,6 +152,10 @@ public class Estructura {
 			campoARellenar.setInformacion(tramaAux);
 			comienza=comienza+campoARellenar.getLongitud();
 			}
+		}
+		}else{
+			System.out.println("La trama no coincide con el largo de la copy: ");
+			System.out.println("Copy: " + campoPadre.getLongitud() + " Trama: " + tramita.length());
 		}
 		
 		
@@ -171,6 +175,29 @@ public class Estructura {
 		
 		return comienza;
 		
+	}
+	public void calcularLongitud(Campo padre){
+		if (padre.getEsOccurs()){
+			for (Campo hijo : padre.getOccursDeCampos()){
+				recursividadjaviana(hijo);
+				padre.agregarLongitud(hijo.getLongitud());
+			
+			}
+		}	
+		if (padre.getEsSupernivel()){
+			for (Campo hijo : padre.getListaDeDependencias()){
+				recursividadjaviana(hijo);
+				padre.agregarLongitud(hijo.getLongitud());
+			}
+		}
+        
+	}
+	
+	public void recursividadjaviana(Campo hijo){
+		
+		if (hijo.getEsOccurs() || hijo.getEsSupernivel()){
+		calcularLongitud(hijo);
+		}
 	}
 	public void aniadirOccurse (Campo c1 , Campo c2){
 		c1.agregarCampoDeOccurs(c2);
