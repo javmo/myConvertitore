@@ -16,7 +16,7 @@ public class EjemploDeLectura {
 		 lee.CargarTrama("S1234567895");
 		 }catch(Exception e){
 			 e.printStackTrace();
-			 System.out.println("Error de lectura");
+			 System.out.println(e.getMessage());
 			 
 		 }		    	  
 		

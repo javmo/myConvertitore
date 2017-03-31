@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
+
 import analizadorLexico.Campo;
 import analizadorLexico.Linea;
 
@@ -63,7 +65,7 @@ public class Estructura {
 
 		}catch  (Exception e)  {
 
-			throw new Exception();
+			throw new Exception("Error de lectura");
 
 		}
 
@@ -137,7 +139,7 @@ public class Estructura {
 		}
 		
 	}
-	public void CargarTrama(String tramita){
+	public void CargarTrama(String tramita) throws Exception{
 		Campo campoPadre =this.listaDeCampos.get(0);
 		int comienza=0;
 		String tramaAux;
@@ -148,7 +150,19 @@ public class Estructura {
 				
 					comienza = cargarTramaDepend(tramita,campoARellenar,comienza);				
 			}else{	
-			tramaAux =  this.trama.substring(comienza,comienza+campoARellenar.getLongitud() - 1);
+			tramaAux =  this.trama.substring(comienza,comienza+campoARellenar.getLongitud());		
+	
+				if (campoARellenar.getEsNumerico()){	
+					try {
+						Integer.parseInt(tramaAux);
+					} catch (Exception e) {
+						// TODO: handle exception
+						Exception e1 = new Exception("Error de tipo, variable: " + campoARellenar.getNombre());
+						throw e1;
+						
+					}
+				}
+							 				
 			campoARellenar.setInformacion(tramaAux);
 			comienza=comienza+campoARellenar.getLongitud();
 			}
@@ -160,14 +174,26 @@ public class Estructura {
 		
 		
 	}
-	public int cargarTramaDepend(String tram,Campo campito,int comienza){
+	public int cargarTramaDepend(String tram,Campo campito,int comienza) throws Exception{
 		String tramaAux=tram;
 
 		for (Campo c :campito.getListaDeDependencias()){
 			if (c.getEsSupernivel()){
 				comienza= cargarTramaDepend(tram, c,comienza);
 			}else{
-				tramaAux =  this.trama.substring(comienza,comienza+c.getLongitud() - 1);
+				tramaAux =  this.trama.substring(comienza,comienza+c.getLongitud());
+				
+				if (c.getEsNumerico()){	
+					try {
+						Integer.parseInt(tramaAux);
+					} catch (Exception e) {
+						// TODO: handle exception
+						Exception e1 = new Exception("Error de tipo, variable: " + c.getNombre());
+						throw e1;
+						
+					}
+				}
+				
 				c.setInformacion(tramaAux);
 				comienza=comienza+c.getLongitud();
 			}
