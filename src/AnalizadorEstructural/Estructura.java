@@ -185,7 +185,7 @@ public class Estructura {
 				
 				if (c.getEsNumerico()){	
 					try {
-						Integer.parseInt(tramaAux);
+						Long.parseLong(tramaAux);
 					} catch (Exception e) {
 						// TODO: handle exception
 						Exception e1 = new Exception("Error de tipo, variable: " + c.getNombre());
@@ -291,7 +291,7 @@ public class Estructura {
 	         
 				if (campoARellenar.getEsNumerico()){	
 					try {
-						Integer.parseInt(valores[comienza]);
+						Long.parseLong(valores[comienza]);
 					} catch (Exception e) {
 						// TODO: handle exception
 						Exception e1 = new Exception("Error de tipo, variable: " + campoARellenar.getNombre());
