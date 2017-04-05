@@ -154,7 +154,7 @@ public class Estructura {
 	
 				if (campoARellenar.getEsNumerico()){	
 					try {
-						Integer.parseInt(tramaAux);
+						Long.parseLong(tramaAux);
 					} catch (Exception e) {
 						// TODO: handle exception
 						Exception e1 = new Exception("Error de tipo, variable: " + campoARellenar.getNombre());
@@ -242,13 +242,96 @@ public class Estructura {
 			caracterSeparacion = tramaCoor.charAt(tramaCoor.length() - 2);
 			aux= ""+ caracterSeparacion;
 			camposCoor = tramaCoorAux.split(aux);
-			for (int i=0;i<camposCoor.length;i++){
+			for (int i=0;i<camposCoor.length - 1;i++){
 				res=res+camposCoor[i];	
 			}
 			
 		 return res;
 			
 		}
+		
+	}
+	public String[] parsearCoordi(String tramaCoor) throws Exception{
+		char[] array=tramaCoor.toCharArray();
+		int j;
+		int inicio=0;
+		char caracterSeparacion;
+		String aux;
+		String[] camposCoor;
+		for (int i=0;i<tramaCoor.length();i++){
+			j=i+1;
+			if (array[i]=='D' && array[j]=='H'){
+			inicio = j+1; 	
+			}
+		}
+		if (inicio==0){
+			throw new Exception ("Error de trama, no existe DH dentro de la trama del coordinador");		
+			
+		}else {
+			String tramaCoorAux;
+			inicio=inicio+5;
+			tramaCoorAux = tramaCoor.substring(inicio);
+			caracterSeparacion = tramaCoor.charAt(tramaCoor.length() - 2);
+			aux= ""+ caracterSeparacion;
+			camposCoor = tramaCoorAux.split(aux);
+		
+		    return camposCoor;
+			
+		}
+		
+	}
+	public void CargarTramaSinLimite(String[] valores) throws Exception{
+		Campo campoPadre =this.listaDeCampos.get(0);
+		int comienza=0;
+		for (Campo campoARellenar : campoPadre.getListaDeDependencias()){
+			if (campoARellenar.getEsSupernivel()){
+				
+					comienza = cargarTramaDependSinLimite(valores,campoARellenar,comienza);				
+			}else{			
+	         
+				if (campoARellenar.getEsNumerico()){	
+					try {
+						Integer.parseInt(valores[comienza]);
+					} catch (Exception e) {
+						// TODO: handle exception
+						Exception e1 = new Exception("Error de tipo, variable: " + campoARellenar.getNombre());
+						throw e1;
+						
+					}
+				}
+							 				
+			campoARellenar.setInformacion(valores[comienza]);
+			comienza++;
+			}
+		}
+		
+		
+		
+	}
+	public int cargarTramaDependSinLimite(String[] valores,Campo campito,int comienza) throws Exception{
+
+		for (Campo c :campito.getListaDeDependencias()){
+			if (c.getEsSupernivel()){
+				comienza= cargarTramaDependSinLimite(valores, c,comienza);
+			}else{
+				
+				if (c.getEsNumerico()){	
+					try {
+						Long.parseLong(valores[comienza]);
+					} catch (Exception e) {
+						// TODO: handle exception
+						Exception e1 = new Exception("Error de tipo, variable: " + c.getNombre());
+						throw e1;
+						
+					}
+				}
+				
+				c.setInformacion(valores[comienza]);
+				comienza++;
+			}
+		}
+		
+		return comienza;
 		
 	}
 	
